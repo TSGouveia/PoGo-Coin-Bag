@@ -3,74 +3,53 @@
 [![GitHub Release](https://img.shields.io/github/v/release/TSGouveia/PoGo-Coin-Bag?style=flat-square)](https://github.com/TSGouveia/PoGo-Coin-Bag/releases)
 [![Releases](https://img.shields.io/badge/Downloads-Releases-blue?style=flat-square)](https://github.com/TSGouveia/PoGo-Coin-Bag/releases)
 
-Obtém o teu **Coin Bag (Saco de Moedas)** no Pokémon GO todos os dias para apanhar o **Gimmighoul**, apanhar **Gimmighoul Coins** e desbloquear o **Golden Lure Module** sem precisares de ter uma consola Nintendo Switch!
+Ativa o **Coin Bag (Saco de Moedas)** no Pokémon GO para apanhar o **Gimmighoul**, juntar **Gimmighoul Coins** e ganhar **Golden Lure Modules** sem precisar de uma Nintendo Switch.
 
 ---
 
-## 🌟 Créditos
+## Créditos
 
-> [!IMPORTANT]
-> **Todo o mérito deste projeto pertence a [@na-ji](https://github.com/na-ji)** no projeto original [`pokemon-go-coin-bag`](https://github.com/na-ji/pokemon-go-coin-bag).
->
-> Foi ele quem teve todo o trabalho de descobrir e criar como isto funciona.
-> 
-> 🌐 **Podes usar a versão Web diretamente no teu browser aqui:** [https://na-ji.github.io/pokemon-go-coin-bag/](https://na-ji.github.io/pokemon-go-coin-bag/)
+O projeto original e o desenvolvimento inicial pertencem a [@na-ji](https://github.com/na-ji) ([pokemon-go-coin-bag](https://github.com/na-ji/pokemon-go-coin-bag)).
+
+A versão web dele pode ser usada diretamente no browser aqui: **[https://na-ji.github.io/pokemon-go-coin-bag/](https://na-ji.github.io/pokemon-go-coin-bag/)**
 
 ---
 
-## 💰 Como Ganhar Moedas e Ativar o Coin Bag
+## Como Ganhar as Moedas e Ativar o Coin Bag
 
-Para ativares o Coin Bag e ganhares moedas no Pokémon GO só precisas de **enviar 1 postal por dia** para uma das opções abaixo:
+Para ativar o Coin Bag só precisas de enviar 1 postal por dia no Pokémon GO:
 
-```mermaid
-flowchart LR
-    A["1. Abre o Pokémon GO"] --> B["2. Vai ao Livro de Postais"]
-    B --> C["3. Escolhe qualquer Postal"]
-    C --> D["4. Clica em 'Enviar para a Nintendo Switch'"]
-    D --> E["🎉 Coin Bag Ativado & Moedas Ganhas!"]
-```
+1. No Pokémon GO, abre a tua lista de itens e vai ao **Livro de Postais**.
+2. Abre qualquer postal que tenhas guardado.
+3. Carrega no menu do postal (canto inferior direito) e escolhe **"Enviar para a Nintendo Switch"**.
+4. Conecta a uma das opções abaixo e o Coin Bag é ativado logo a seguir.
 
----
-
-## 📲 Escolhe como queres usar
-
-Podes usar qualquer uma das opções abaixo para receber o teu postal diário:
-
-### Opção 1: No Computador / Browser (Mais Rápido)
-1. Abre o link no teu PC/Mac (no Chrome ou Edge com Bluetooth ligado): **[https://na-ji.github.io/pokemon-go-coin-bag/](https://na-ji.github.io/pokemon-go-coin-bag/)**.
-2. Clica no botão no site para procurar o telemóvel.
-3. No Pokémon GO, envia o teu postal para a Nintendo Switch.
+### Recompensas:
+* **Coin Bag diário:** Funciona durante 30 minutos a atrair Gimmighoul.
+* **Gimmighoul Coins:** Ganhas moedas ao apanhar Gimmighoul e em PokéStops douradas (precisas de 999 para evoluir para Gholdengo).
+* **Golden Lure Module:** Recebes 1 a cada 5 postais que enviares.
 
 ---
 
-### Opção 2: Com uma placa ESP32 (A mais prática para o dia a dia)
-*Se tiveres uma pequena placa ESP32, ela funciona como uma "Switch de bolso" que podes ligar a qualquer carregador USB:*
-1. Instala o ficheiro na placa: [Download Firmware ESP32 (.zip)](https://github.com/TSGouveia/PoGo-Coin-Bag/releases/download/esp32-v1.0.0/pogo-coin-bag-esp32-firmware.zip).
-2. Liga o ESP32 a uma porta USB ou powerbank (ele liga-se logo sozinho, não precisas de carregar em nenhum botão).
-3. No Pokémon GO:
-   - *(Apenas na 1ª vez)* Vai a **Definições > Dispositivos Conectados e Serviços > Nintendo Switch > Conectar à Nintendo Switch**.
-   - Depois vai ao teu **Livro de Postais**, escolhe um postal e toca em **Enviar para a Nintendo Switch**.
-4. O LED da placa fica fixo a confirmar o sucesso e o Coin Bag abre no jogo!
+## Opções Disponíveis
 
----
+Podes escolher qualquer um destes métodos para receber o postal:
 
-### Opção 3: Num segundo telemóvel (App Android)
-1. Instala a app num segundo telemóvel: [Download APK Android](https://github.com/TSGouveia/PoGo-Coin-Bag/releases/download/android-v1.0.0/pogo-coin-bag-android.apk).
-2. Abre a app e deixa-a aberta.
-3. No teu telemóvel onde jogas Pokémon GO, vai aos teus Postais e clica em **Enviar para a Nintendo Switch**.
+### 1. No Browser (Web)
+* Abre **[https://na-ji.github.io/pokemon-go-coin-bag/](https://na-ji.github.io/pokemon-go-coin-bag/)** no Chrome ou Edge (com Bluetooth ligado no PC/Mac).
+* Clica no botão no site para procurar o jogo e envia o postal no Pokémon GO.
 
----
+### 2. ESP32
+* [Download Firmware (.zip)](https://github.com/TSGouveia/PoGo-Coin-Bag/releases/download/esp32-v1.0.0/pogo-coin-bag-esp32-firmware.zip)
+* Carrega o código para a placa ESP32.
+* Liga o ESP32 à corrente (USB). Ele conecta-se sozinho sem precisares de carregar em botões.
+* No Pokémon GO, envia o postal para a Switch.
 
-### Opção 4: No Smartwatch (Wear OS)
-1. Instala a app no teu relógio Wear OS: [Download APK Wear OS](https://github.com/TSGouveia/PoGo-Coin-Bag/releases/download/wear-os-v1.0.0/pogo-coin-bag-wearos.apk).
-2. Abre a app no relógio.
-3. No telemóvel, vai aos Postais e envia para a Nintendo Switch.
+### 3. App Android
+* [Download APK](https://github.com/TSGouveia/PoGo-Coin-Bag/releases/download/android-v1.0.0/pogo-coin-bag-android.apk)
+* Instala e abre a app num telemóvel secundário.
+* No teu telemóvel com o jogo, envia o postal.
 
----
-
-## 🎁 Recompensas no Pokémon GO
-
-* **1º Envio diário:** Recebes o **Coin Bag (Saco de Moedas)** que funciona como um Incenso durante 30 minutos atraindo Gimmighoul (Roaming Form).
-* **Apanhar Gimmighoul:** Dá-te **Gimmighoul Coins** e doces.
-* **Envios repetidos:** Cada dia que envias um postal, reativas o Coin Bag.
-* **A cada 5 postais enviados:** Recebes um **Golden Lure Module (Módulo Atraente Dourado)** para transformar PokéStops em douradas e ganhar ainda mais moedas!
+### 4. Smartwatch (Wear OS)
+* [Download APK Wear OS](https://github.com/TSGouveia/PoGo-Coin-Bag/releases/download/wear-os-v1.0.0/pogo-coin-bag-wearos.apk)
+* Instala no relógio, abre a app e envia o postal a partir do jogo.
