@@ -1,0 +1,15 @@
+# Build artifacts
+.gradle/
+build/
+bin/
+*/build/
+*/.gradle/
+*/*/build/
+*/*/bin/
+
+# Local configuration
+local.properties
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
