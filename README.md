@@ -35,18 +35,18 @@ Para receberes as recompensas, só precisas de escolher **uma** das plataformas 
 *Requisitos: PC ou Mac com Bluetooth ligado e navegador Google Chrome, Microsoft Edge ou Opera.*
 
 #### Passo A: Emparelhar (Apenas na 1.ª vez)
-1. No computador, abre o site: **[https://na-ji.github.io/pokemon-go-coin-bag/](https://na-ji.github.io/pokemon-go-coin-bag/)**.
-2. No telemóvel, abre o **Pokémon GO** e toca na Pokébola > **Definições** (canto superior direito).
-3. Desce até **Dispositivos Conectados e Serviços** > seleciona **Nintendo Switch**.
-4. Toca em **Conectar à Nintendo Switch**.
-5. No computador, clica no botão **Connect** do site e escolhe o teu telemóvel na janela que surgir. O jogo confirma a ligação com sucesso.
+1. No telemóvel, abre o **Pokémon GO** e toca na Pokébola > **Definições** (canto superior direito).
+2. Desce até **Dispositivos Conectados e Serviços** > seleciona **Nintendo Switch**.
+3. Toca em **Conectar à Nintendo Switch** (o jogo fica à procura).
+4. No computador, abre o site: **[https://na-ji.github.io/pokemon-go-coin-bag/](https://na-ji.github.io/pokemon-go-coin-bag/)**.
+5. Clica no botão **Connect** e seleciona o teu telemóvel na lista do navegador. O jogo confirma o emparelhamento com sucesso!
 
 #### Passo B: Enviar o Postal Diário
-1. No Pokémon GO, abre a tua Bolsa de Itens e entra no **Livro de Postais**.
-2. Abre qualquer postal que tenhas guardado.
+1. No telemóvel, abre o **Pokémon GO**, vai à Bolsa de Itens e entra no **Livro de Postais**.
+2. Abre qualquer postal guardado.
 3. Toca no botão de opções (canto inferior direito do postal) e escolhe **Enviar para a Nintendo Switch**.
-4. No site no computador, clica novamente em **Connect** e seleciona o telemóvel.
-5. O postal é transferido e o **Coin Bag é ativado de imediato** na tua conta!
+4. No site no computador, clica em **Connect** e seleciona o teu telemóvel.
+5. O postal é enviado e o **Coin Bag é ativado de imediato** na tua conta!
 
 ---
 
@@ -57,17 +57,17 @@ Para receberes as recompensas, só precisas de escolher **uma** das plataformas 
 
 #### Passo A: Preparação
 1. Descarrega o ficheiro zip da release e grava o código na tua placa ESP32 através do Arduino IDE.
-2. Liga o ESP32 à tomada ou a uma porta USB. Ele inicia logo o modo de procura contínuo automaticamente.
+2. Liga o ESP32 à tomada ou porta USB quando quiseres usar.
 
 #### Passo B: Emparelhar (Apenas na 1.ª vez)
-1. No Pokémon GO, vai a **Definições** > **Dispositivos Conectados e Serviços** > **Nintendo Switch**.
-2. Toca em **Conectar à Nintendo Switch**.
-3. O ESP32 deteta o telemóvel e conclui o emparelhamento sozinho em poucos segundos.
+1. No telemóvel, abre o **Pokémon GO** e vai a **Definições** > **Dispositivos Conectados e Serviços** > **Nintendo Switch**.
+2. Toca em **Conectar à Nintendo Switch** (o jogo fica à procura).
+3. Liga ou reinicia o ESP32 (ou mantém-no perto). O ESP32 deteta o telemóvel e conclui o emparelhamento sozinho em poucos segundos.
 
 #### Passo C: Enviar o Postal Diário
-1. Vai ao teu **Livro de Postais** no Pokémon GO e escolhe um postal.
-2. Toca nas opções do postal e seleciona **Enviar para a Nintendo Switch**.
-3. O ESP32 recebe a transferência automaticamente. O LED da placa acende fixo a confirmar o sucesso e recebes o Coin Bag no jogo.
+1. No telemóvel, abre o **Pokémon GO**, vai ao **Livro de Postais** e escolhe um postal.
+2. Toca no botão de opções e escolhe **Enviar para a Nintendo Switch**.
+3. O ESP32 deteta a transferência automaticamente. O LED acende fixo a confirmar o sucesso e o Coin Bag é ativado no jogo!
 
 ---
 
@@ -77,17 +77,19 @@ Para receberes as recompensas, só precisas de escolher **uma** das plataformas 
 > 📥 **Download:** [`pogo-coin-bag-android.apk`](https://github.com/TSGouveia/PoGo-Coin-Bag/releases/download/android-v1.0.0/pogo-coin-bag-android.apk)
 
 #### Passo A: Instalação e Preparação
-1. Instala e abre o ficheiro `.apk` no teu segundo telemóvel (aceita as permissões de Bluetooth / Dispositivos Próximos).
-2. Deixa a app aberta no ecrã.
+1. Instala e abre o ficheiro `.apk` no teu segundo telemóvel (aceita as permissões de Bluetooth e Dispositivos Próximos).
+2. Mantém a app aberta no ecrã.
 
 #### Passo B: Emparelhar (Apenas na 1.ª vez)
-1. No teu telemóvel principal (onde jogas Pokémon GO), abre o jogo e vai a **Definições** > **Dispositivos Conectados e Serviços** > **Nintendo Switch**.
-2. Toca em **Conectar à Nintendo Switch** para emparelhar com a app.
+1. No teu telemóvel principal, abre o **Pokémon GO** e vai a **Definições** > **Dispositivos Conectados e Serviços** > **Nintendo Switch**.
+2. Toca em **Conectar à Nintendo Switch** (o jogo fica à procura).
+3. Na app do segundo telemóvel, clica no botão **Conectar** (iniciar procura). A ligação é concluída automaticamente!
 
 #### Passo C: Enviar o Postal Diário
-1. No Pokémon GO, abre a tua Bolsa de Itens e entra no **Livro de Postais**.
-2. Escolhe qualquer postal guardado, toca no botão de opções e seleciona **Enviar para a Nintendo Switch**.
-3. A app recebe a transferência, regista no histórico e o Coin Bag é ativado no jogo!
+1. No telemóvel principal, abre o **Pokémon GO**, vai ao **Livro de Postais** e escolhe um postal.
+2. Toca no botão de opções e escolhe **Enviar para a Nintendo Switch**.
+3. Na app do segundo telemóvel, clica no botão **Conectar**.
+4. O postal é transferido, a app confirma o sucesso e o Coin Bag é ativado no jogo!
 
 ---
 
@@ -98,16 +100,18 @@ Para receberes as recompensas, só precisas de escolher **uma** das plataformas 
 
 #### Passo A: Instalação e Preparação
 1. Instala a app no teu smartwatch (usando ADB wireless ou apps como Wear Installer).
-2. Abre a app no relógio e mantém-na no ecrã.
+2. Abre a app no relógio e mantém o ecrã ativo.
 
 #### Passo B: Emparelhar (Apenas na 1.ª vez)
-1. No Pokémon GO do teu telemóvel, vai a **Definições** > **Dispositivos Conectados e Serviços** > **Nintendo Switch**.
-2. Toca em **Conectar à Nintendo Switch** para concluir a ligação inicial.
+1. No telemóvel, abre o **Pokémon GO** e vai a **Definições** > **Dispositivos Conectados e Serviços** > **Nintendo Switch**.
+2. Toca em **Conectar à Nintendo Switch** (o jogo fica à procura).
+3. No relógio, toca no botão **Conectar**. O emparelhamento inicial fica concluído de imediato!
 
 #### Passo C: Enviar o Postal Diário
 1. No telemóvel, vai ao **Livro de Postais** no Pokémon GO e escolhe um postal.
-2. Toca nas opções do postal e seleciona **Enviar para a Nintendo Switch**.
-3. O relógio processa o envio e o Coin Bag é ativado no jogo!
+2. Toca no botão de opções e escolhe **Enviar para a Nintendo Switch**.
+3. No relógio, toca no botão **Conectar**.
+4. O relógio processa a transferência e o Coin Bag é ativado no jogo!
 
 ---
 
