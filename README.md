@@ -6,11 +6,6 @@
 
 Activate the **Coin Bag**, catch **Roaming Form Gimmighoul**, collect **Gimmighoul Coins**, and earn **Golden Lure Modules** daily in Pokémon GO without needing a physical console.
 
----
-
-[![GitHub Release](https://img.shields.io/github/v/release/TSGouveia/PoGo-Coin-Bag?style=for-the-badge&logo=github&color=blue)](https://github.com/TSGouveia/PoGo-Coin-Bag/releases)
-[![Web App](https://img.shields.io/badge/Web_App-na--ji.github.io-success?style=for-the-badge&logo=googlechrome)](https://na-ji.github.io/pokemon-go-coin-bag/)
-
 </div>
 
 ---
