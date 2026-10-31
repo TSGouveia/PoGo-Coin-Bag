@@ -28,7 +28,7 @@ By sending a daily postcard, you automatically receive in Pokémon GO:
 ## 📋 Step-by-Step Guide
 
 > [!WARNING]
-> **Autocatcher Warning:** If you have an active or connected autocatcher device (e.g., Pokémon GO Plus, Poké Ball Plus, Go-tcha, etc.), the connection to the Nintendo Switch emulator may fail or be unstable. It is strongly recommended to temporarily disconnect any autocatcher before pairing or sending postcards.
+> **Autocatcher Warning:** If you have an active or connected autocatcher device, the connection to the Nintendo Switch emulator may fail. It is strongly recommended to temporarily disconnect any autocatcher before pairing or sending postcards.
 
 To receive rewards, simply pick **one** of the available platforms below.
 
@@ -97,7 +97,7 @@ To receive rewards, simply pick **one** of the available platforms below.
 ---
 
 ### Option 4: Smartwatch (Wear OS)
-*Requirements: Wear OS smartwatch (Galaxy Watch 4/5/6, Pixel Watch, etc.).*
+*Requirements: Wear OS smartwatch (Galaxy Watch, Pixel Watch, etc.).*
 
 > 📥 **Download:** [`pogo-coin-bag-wearos.apk`](https://github.com/TSGouveia/PoGo-Coin-Bag/releases/download/wear-os-v1.0.0/pogo-coin-bag-wearos.apk)
 
