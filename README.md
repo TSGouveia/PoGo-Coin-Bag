@@ -48,7 +48,27 @@ To receive rewards, simply pick **one** of the available platforms below.
 
 ---
 
-### Option 2: Using ESP32 (Plug & Play)
+### Option 2: Windows Desktop App (.exe)
+*Requirements: Windows 10/11 PC with Bluetooth.*
+
+> 📥 **Download:** [`PoGoCoinBag.exe`](https://github.com/TSGouveia/PoGo-Coin-Bag/releases/download/windows-v1.0.0/PoGoCoinBag.exe)
+
+A modern desktop assistant for Windows that checks your Bluetooth driver/adapter, tells you whether Bluetooth is turned on, lets you turn it on or open Windows Bluetooth settings with one click, and launches the web console directly.
+
+#### Step A: Setup & Diagnostics
+1. Download and run **`PoGoCoinBag.exe`**.
+2. The app automatically detects your Bluetooth hardware and status:
+   - If Bluetooth is **OFF**, click **⚡ Turn on Bluetooth** or open Windows settings directly from the app.
+   - If Bluetooth is **ON**, you're ready to proceed!
+
+#### Step B: Pairing & Sending Postcard
+1. On your phone, open **Pokémon GO** and follow the Switch pairing or postcard send screen.
+2. Click **🚀 Open Web Console** inside the desktop app.
+3. Select your phone and the Coin Bag will be activated!
+
+---
+
+### Option 3: Using ESP32 (Plug & Play)
 *Requirements: An ESP32 development board plugged into any USB port or charger.*
 
 > 📥 **Download:** [`esp32_pogo_coin_bag.zip`](https://github.com/TSGouveia/PoGo-Coin-Bag/releases/download/esp32-v1.0.0/esp32_pogo_coin_bag.zip)
@@ -69,7 +89,7 @@ To receive rewards, simply pick **one** of the available platforms below.
 
 ---
 
-### Option 3: Android App (On a secondary phone)
+### Option 4: Android App (On a secondary phone)
 *Requirements: A secondary Android phone or tablet with Bluetooth.*
 
 > 📥 **Download:** [`pogo-coin-bag-android.apk`](https://github.com/TSGouveia/PoGo-Coin-Bag/releases/download/android-v1.0.0/pogo-coin-bag-android.apk)
@@ -91,8 +111,8 @@ To receive rewards, simply pick **one** of the available platforms below.
 
 ---
 
-### Option 4: Smartwatch (Wear OS)
-*Requirements: Wear OS smartwatch (Galaxy Watch, Pixel Watch, etc.).*
+### Option 5: Smartwatch (Wear OS)
+*Requirements: Wear OS smartwatch (Galaxy Watch 4/5/6, Pixel Watch, etc.).*
 
 > 📥 **Download:** [`pogo-coin-bag-wearos.apk`](https://github.com/TSGouveia/PoGo-Coin-Bag/releases/download/wear-os-v1.0.0/pogo-coin-bag-wearos.apk)
 

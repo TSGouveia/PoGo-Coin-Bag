@@ -2,14 +2,19 @@
 .gradle/
 build/
 bin/
+obj/
 */build/
 */.gradle/
 */*/build/
 */*/bin/
+desktop-app/bin/
+desktop-app/obj/
 
 # Local configuration
 local.properties
 .idea/
+.vs/
+*.user
 *.iml
 .DS_Store
 Thumbs.db
