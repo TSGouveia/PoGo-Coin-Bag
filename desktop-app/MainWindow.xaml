@@ -2,8 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="PoGo Coin Bag - Nintendo Switch Emulator" 
-        Height="780" Width="980"
-        MinHeight="680" MinWidth="880"
+        Height="840" Width="1080"
+        MinHeight="720" MinWidth="940"
         WindowStartupLocation="CenterScreen"
         Background="#0B0D14"
         Foreground="#ECEFF4"
@@ -12,7 +12,7 @@
     <Window.Resources>
         <!-- Primary Action Button -->
         <Style TargetType="Button" x:Key="ActionButton">
-            <Setter Property="Background" Value="#3B82F6"/>
+            <Setter Property="Background" Value="#2563EB"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
@@ -32,10 +32,10 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#60A5FA"/>
+                    <Setter Property="Background" Value="#3B82F6"/>
                 </Trigger>
                 <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="#2563EB"/>
+                    <Setter Property="Background" Value="#1D4ED8"/>
                 </Trigger>
                 <Trigger Property="IsEnabled" Value="False">
                     <Setter Property="Background" Value="#262C3A"/>
@@ -104,7 +104,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid Margin="32">
+    <Grid Margin="28">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/> <!-- Header -->
             <RowDefinition Height="Auto"/> <!-- Bluetooth Status Alert Banner -->
@@ -112,14 +112,14 @@
         </Grid.RowDefinitions>
 
         <!-- 1. Header with Logo & Title -->
-        <DockPanel Grid.Row="0" Margin="0,0,0,20" LastChildFill="False">
+        <DockPanel Grid.Row="0" Margin="0,0,0,18" LastChildFill="False">
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
                 <Border CornerRadius="12" Background="#1A2234" Width="52" Height="52" Margin="0,0,16,0" VerticalAlignment="Center">
                     <Image Source="logo.png" Width="42" Height="42" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Border>
                 <StackPanel VerticalAlignment="Center">
                     <TextBlock Text="PoGo Coin Bag" FontSize="26" FontWeight="ExtraBold" Foreground="#F8FAFC"/>
-                    <TextBlock Text="Emulador Autónomo de Nintendo Switch para Pokémon GO" FontSize="13" Foreground="#94A3B8" Margin="0,2,0,0"/>
+                    <TextBlock Text="Emulador Autónomo de Nintendo Switch para Pokémon GO" FontSize="13" Foreground="#94A3B8" Margin="0,3,0,0"/>
                 </StackPanel>
             </StackPanel>
 
@@ -130,7 +130,7 @@
         </DockPanel>
 
         <!-- 2. Bluetooth Hardware Diagnostic Bar -->
-        <Border Grid.Row="1" Background="#161B26" CornerRadius="12" Padding="16,14" Margin="0,0,0,20" BorderBrush="#262F40" BorderThickness="1">
+        <Border Grid.Row="1" Background="#161B26" CornerRadius="12" Padding="18,14" Margin="0,0,0,18" BorderBrush="#262F40" BorderThickness="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -141,29 +141,30 @@
                 <Ellipse x:Name="StatusDot" Width="14" Height="14" Fill="#EAB308" Margin="0,0,14,0" VerticalAlignment="Center"/>
 
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Adaptador Bluetooth: " Foreground="#94A3B8" FontSize="13"/>
-                        <TextBlock x:Name="TxtAdapterName" Text="A verificar drivers..." FontWeight="SemiBold" Foreground="#F8FAFC" FontSize="13"/>
-                        <TextBlock Text=" • Estado: " Foreground="#94A3B8" FontSize="13" Margin="8,0,0,0"/>
-                        <TextBlock x:Name="TxtRadioStatus" Text="A verificar rádio..." FontWeight="Bold" Foreground="#FACC15" FontSize="13"/>
-                    </StackPanel>
-                    <TextBlock x:Name="TxtStatusHint" Text="O Bluetooth nativo do Windows será usado para a comunicação direta com o Pokémon GO." Foreground="#64748B" FontSize="12" Margin="0,2,0,0"/>
+                    <!-- WrapPanel prevents Bluetooth adapter text and radio status from clipping -->
+                    <WrapPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="Adaptador Bluetooth: " Foreground="#94A3B8" FontSize="13" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="TxtAdapterName" Text="A verificar drivers..." FontWeight="SemiBold" Foreground="#F8FAFC" FontSize="13" VerticalAlignment="Center"/>
+                        <TextBlock Text="  •  Estado: " Foreground="#94A3B8" FontSize="13" VerticalAlignment="Center" Margin="6,0,0,0"/>
+                        <TextBlock x:Name="TxtRadioStatus" Text="A verificar rádio..." FontWeight="Bold" Foreground="#FACC15" FontSize="13" VerticalAlignment="Center"/>
+                    </WrapPanel>
+                    <TextBlock x:Name="TxtStatusHint" Text="O Bluetooth nativo do Windows será usado para a comunicação direta com o Pokémon GO." Foreground="#64748B" FontSize="12" Margin="0,4,0,0" TextWrapping="Wrap"/>
                 </StackPanel>
 
-                <Button x:Name="BtnTurnOnBluetooth" Grid.Column="2" Content="⚡ Ligar Bluetooth" Style="{StaticResource GreenButton}" Padding="16,8" FontSize="13" Visibility="Collapsed" Click="BtnTurnOnBluetooth_Click"/>
+                <Button x:Name="BtnTurnOnBluetooth" Grid.Column="2" Content="⚡ Ligar Bluetooth" Style="{StaticResource GreenButton}" Padding="16,8" FontSize="13" Margin="12,0,0,0" Visibility="Collapsed" Click="BtnTurnOnBluetooth_Click"/>
             </Grid>
         </Border>
 
         <!-- 3. Main Workspace: Two Columns (Left: Instructions & Action, Right: Live Activity Log) -->
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1.25*"/>
-                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="18"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <!-- Left Column: Instructions and Big Connect Action -->
-            <Border Grid.Column="0" Background="#141824" CornerRadius="14" Padding="24" BorderBrush="#222B3D" BorderThickness="1">
+            <Border Grid.Column="0" Background="#141824" CornerRadius="14" Padding="20" BorderBrush="#222B3D" BorderThickness="1">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -171,12 +172,12 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="Instruções de Utilização" FontSize="17" FontWeight="Bold" Foreground="#F1F5F9" Margin="0,0,0,16"/>
+                    <TextBlock Grid.Row="0" Text="Instruções de Utilização" FontSize="17" FontWeight="Bold" Foreground="#F1F5F9" Margin="0,0,0,14"/>
 
-                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                        <StackPanel Margin="0,0,8,0">
-                            <!-- Card Step 1: Pairing -->
-                            <Border Background="#1C2333" CornerRadius="10" Padding="16" Margin="0,0,0,14" BorderBrush="#2E384D" BorderThickness="1">
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="0,0,8,0">
+                        <StackPanel>
+                            <!-- Card Step 1: Initial Pairing -->
+                            <Border Background="#1C2333" CornerRadius="10" Padding="14,12" Margin="0,0,0,12" BorderBrush="#2E384D" BorderThickness="1">
                                 <StackPanel>
                                     <DockPanel LastChildFill="False">
                                         <TextBlock Text="Passo 1: Emparelhamento Inicial" FontWeight="Bold" FontSize="14" Foreground="#38BDF8" DockPanel.Dock="Left"/>
@@ -184,14 +185,14 @@
                                             <TextBlock Text="Fazer apenas 1 vez" FontSize="11" FontWeight="Bold" Foreground="White"/>
                                         </Border>
                                     </DockPanel>
-                                    <TextBlock Text="1. No telemóvel, abre o Pokémon GO → Poké Ball → Definições." FontSize="13" Foreground="#CBD5E1" Margin="0,8,0,0"/>
-                                    <TextBlock Text="2. Desce até Dispositivos Ligados → Nintendo Switch → Conectar à Nintendo Switch." FontSize="13" Foreground="#CBD5E1" Margin="0,3,0,0"/>
-                                    <TextBlock Text="3. Clica no botão azul 'Conectar e Receber' abaixo para concluir o emparelhamento." FontSize="13" Foreground="#FCD34D" FontWeight="Medium" Margin="0,3,0,0"/>
+                                    <TextBlock Text="1. No telemóvel, abre o Pokémon GO → Poké Ball → Definições." FontSize="12.5" Foreground="#CBD5E1" Margin="0,8,0,0" TextWrapping="Wrap"/>
+                                    <TextBlock Text="2. Desce até Dispositivos Ligados → Nintendo Switch → Conectar à Nintendo Switch." FontSize="12.5" Foreground="#CBD5E1" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                                    <TextBlock Text="3. Clica no botão azul 'Conectar e Receber' abaixo para concluir o emparelhamento." FontSize="12.5" Foreground="#FCD34D" FontWeight="Medium" Margin="0,4,0,0" TextWrapping="Wrap"/>
                                 </StackPanel>
                             </Border>
 
                             <!-- Card Step 2: Daily Postcard -->
-                            <Border Background="#1C2333" CornerRadius="10" Padding="16" Margin="0,0,0,14" BorderBrush="#2E384D" BorderThickness="1">
+                            <Border Background="#1C2333" CornerRadius="10" Padding="14,12" Margin="0,0,0,12" BorderBrush="#2E384D" BorderThickness="1">
                                 <StackPanel>
                                     <DockPanel LastChildFill="False">
                                         <TextBlock Text="Passo 2: Enviar Postal Diário" FontWeight="Bold" FontSize="14" Foreground="#34D399" DockPanel.Dock="Left"/>
@@ -199,24 +200,24 @@
                                             <TextBlock Text="Sempre que quiseres o Coin Bag" FontSize="11" FontWeight="Bold" Foreground="White"/>
                                         </Border>
                                     </DockPanel>
-                                    <TextBlock Text="1. No Pokémon GO, vai à Mochila (Itens) → Livro de Postais." FontSize="13" Foreground="#CBD5E1" Margin="0,8,0,0"/>
-                                    <TextBlock Text="2. Abre qualquer postal guardado, toca no menu (três barras) e escolhe Enviar para a Nintendo Switch." FontSize="13" Foreground="#CBD5E1" Margin="0,3,0,0"/>
-                                    <TextBlock Text="3. Clica no botão azul 'Conectar e Receber' abaixo. O Coin Bag é ativado de imediato!" FontSize="13" Foreground="#FCD34D" FontWeight="Medium" Margin="0,3,0,0"/>
+                                    <TextBlock Text="1. No Pokémon GO, vai à Mochila (Itens) → Livro de Postais." FontSize="12.5" Foreground="#CBD5E1" Margin="0,8,0,0" TextWrapping="Wrap"/>
+                                    <TextBlock Text="2. Abre qualquer postal guardado, toca no menu (três barras) e escolhe Enviar para a Nintendo Switch." FontSize="12.5" Foreground="#CBD5E1" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                                    <TextBlock Text="3. Clica no botão azul 'Conectar e Receber' abaixo. O Coin Bag é ativado de imediato no jogo!" FontSize="12.5" Foreground="#FCD34D" FontWeight="Medium" Margin="0,4,0,0" TextWrapping="Wrap"/>
                                 </StackPanel>
                             </Border>
 
                             <!-- Autocatcher Warning -->
-                            <Border Background="#2A1B16" CornerRadius="10" Padding="12" BorderBrush="#5E2C1A" BorderThickness="1">
-                                <TextBlock Text="⚠️ Nota: Se usas um autocatcher (ex: Pokémon GO Plus), desativa-o temporariamente antes de transferir." 
-                                           FontSize="12" Foreground="#FDBA74" TextWrapping="Wrap"/>
+                            <Border Background="#2A1B16" CornerRadius="10" Padding="12,10" BorderBrush="#5E2C1A" BorderThickness="1">
+                                <TextBlock Text="⚠️ Se usas um autocatcher (ex: Pokémon GO Plus), desativa-o temporariamente antes de transferir." 
+                                           FontSize="11.5" Foreground="#FDBA74" TextWrapping="Wrap" LineHeight="16"/>
                             </Border>
                         </StackPanel>
                     </ScrollViewer>
 
                     <!-- Big Action Section -->
-                    <StackPanel Grid.Row="2" Margin="0,18,0,0">
-                        <Button x:Name="BtnConnect" Content="📡 Conectar e Receber" Style="{StaticResource ActionButton}" Height="54" FontSize="16" Click="BtnConnect_Click"/>
-                        <Button x:Name="BtnCancel" Content="⏹️ Cancelar Operação" Style="{StaticResource DangerButton}" Height="40" Margin="0,8,0,0" Visibility="Collapsed" Click="BtnCancel_Click"/>
+                    <StackPanel Grid.Row="2" Margin="0,14,0,0">
+                        <Button x:Name="BtnConnect" Content="📡 Conectar e Receber" Style="{StaticResource ActionButton}" Height="50" FontSize="15" Click="BtnConnect_Click"/>
+                        <Button x:Name="BtnCancel" Content="⏹️ Cancelar Operação" Style="{StaticResource DangerButton}" Height="38" Margin="0,8,0,0" Visibility="Collapsed" Click="BtnCancel_Click"/>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -238,7 +239,7 @@
                     <!-- Active state banner -->
                     <Border Grid.Row="1" x:Name="StateBanner" Background="#1B2232" CornerRadius="8" Padding="12" Margin="0,0,0,12" BorderBrush="#2C384E" BorderThickness="1">
                         <StackPanel>
-                            <TextBlock x:Name="TxtStateHeadline" Text="Pronto a Conectar" FontWeight="Bold" FontSize="14" Foreground="#38BDF8"/>
+                            <TextBlock x:Name="TxtStateHeadline" Text="Pronto a Conectar" FontWeight="Bold" FontSize="14" Foreground="#38BDF8" TextWrapping="Wrap"/>
                             <TextBlock x:Name="TxtStateDetail" Text="Clica no botão 'Conectar e Receber' quando estiveres no jogo." FontSize="12" Foreground="#94A3B8" Margin="0,3,0,0" TextWrapping="Wrap"/>
                         </StackPanel>
                     </Border>
