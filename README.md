@@ -53,18 +53,25 @@ To receive rewards, simply pick **one** of the available platforms below.
 
 > 📥 **Download:** [`PoGoCoinBag.exe`](https://github.com/TSGouveia/PoGo-Coin-Bag/releases/download/windows-v1.0.0/PoGoCoinBag.exe)
 
-A modern desktop assistant for Windows that checks your Bluetooth driver/adapter, tells you whether Bluetooth is turned on, lets you turn it on or open Windows Bluetooth settings with one click, and launches the web console directly.
+A standalone native Windows app that runs completely independently from the browser! It monitors your Bluetooth driver and hardware state, lets you toggle Bluetooth or open settings with one click, and executes the Nintendo Switch BLE protocol directly to pair and receive postcards.
 
-#### Step A: Setup & Diagnostics
+#### Step A: Bluetooth Diagnostics
 1. Download and run **`PoGoCoinBag.exe`**.
-2. The app automatically detects your Bluetooth hardware and status:
-   - If Bluetooth is **OFF**, click **⚡ Turn on Bluetooth** or open Windows settings directly from the app.
-   - If Bluetooth is **ON**, you're ready to proceed!
+2. The app automatically detects your Bluetooth adapter and radio status:
+   - If Bluetooth is **OFF**, click **⚡ Turn on Bluetooth** or open Windows settings directly.
+   - If Bluetooth is **ON**, the app is ready for connection!
 
-#### Step B: Pairing & Sending Postcard
-1. On your phone, open **Pokémon GO** and follow the Switch pairing or postcard send screen.
-2. Click **🚀 Open Web Console** inside the desktop app.
-3. Select your phone and the Coin Bag will be activated!
+#### Step B: Pairing (First time only)
+1. On your phone, open **Pokémon GO**, tap the Poké Ball > **Settings** (top right).
+2. Scroll down to **Connected Devices and Services** > select **Nintendo Switch**.
+3. Tap **Connect to Nintendo Switch** (the game begins searching).
+4. In **`PoGoCoinBag.exe`**, click the **📡 Conectar e Receber** button. The app completes pairing directly over BLE!
+
+#### Step C: Send Daily Postcard
+1. On your phone, open **Pokémon GO**, go to your Item Bag, and open the **Postcard Book**.
+2. Open any saved postcard, tap the menu (bottom right) and choose **Send to Nintendo Switch**.
+3. In **`PoGoCoinBag.exe`**, click **📡 Conectar e Receber**.
+4. The postcard transfers natively in seconds, and the **Coin Bag is activated** in Pokémon GO!
 
 ---
 

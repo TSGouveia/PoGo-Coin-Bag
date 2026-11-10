@@ -9,6 +9,11 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>PoGoCoinBag</AssemblyName>
     <RootNamespace>PoGoCoinBagWindows</RootNamespace>
+    <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="app.ico" />
+  </ItemGroup>
 
 </Project>

@@ -12,45 +12,46 @@ namespace PoGoCoinBagWindows
     public partial class MainWindow : Window
     {
         private Radio? _bluetoothRadio;
+        private readonly BleSwitchClient _client = new();
 
         public MainWindow()
         {
             InitializeComponent();
-            Loaded += async (_, _) => await CheckBluetoothStatusAsync();
+
+            _client.StateChanged += OnClientStateChanged;
+            _client.LogMessage += OnClientLog;
+
+            Loaded += async (_, _) => await CheckBluetoothHardwareAsync();
         }
 
-        private async Task CheckBluetoothStatusAsync()
+        private async Task CheckBluetoothHardwareAsync()
         {
-            BtnRefresh.IsEnabled = false;
-            TxtRadioStatus.Text = "A verificar estado...";
-            TxtRadioStatus.Foreground = new SolidColorBrush(Color.FromRgb(0x94, 0xA3, 0xB8));
-            StatusIndicatorDot.Fill = new SolidColorBrush(Color.FromRgb(0xEA, 0xB3, 0x08)); // Yellow
+            BtnRefreshStatus.IsEnabled = false;
+            TxtRadioStatus.Text = "A verificar...";
+            TxtRadioStatus.Foreground = new SolidColorBrush(Color.FromRgb(0xF5, 0x9E, 0x0B));
+            StatusDot.Fill = new SolidColorBrush(Color.FromRgb(0xF5, 0x9E, 0x0B));
 
             try
             {
-                // 1. Check default adapter availability
                 BluetoothAdapter? adapter = null;
                 try
                 {
                     adapter = await BluetoothAdapter.GetDefaultAsync();
                 }
-                catch
-                {
-                    // Adapter query exception
-                }
+                catch { }
 
                 if (adapter == null)
                 {
-                    TxtAdapterName.Text = "Nenhum adaptador detetado";
-                    TxtRadioStatus.Text = "Sem Suporte Bluetooth";
-                    TxtRadioStatus.Foreground = new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44)); // Red
-                    StatusIndicatorDot.Fill = new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44));
-                    BtnTurnOn.Visibility = Visibility.Collapsed;
-                    BtnRefresh.IsEnabled = true;
+                    TxtAdapterName.Text = "Nenhum adaptador encontrado";
+                    TxtRadioStatus.Text = "Sem Hardware Bluetooth";
+                    TxtRadioStatus.Foreground = new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44));
+                    StatusDot.Fill = new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44));
+                    BtnTurnOnBluetooth.Visibility = Visibility.Collapsed;
+                    BtnConnect.IsEnabled = false;
+                    AppendLog("[Hardware] Nenhum adaptador Bluetooth foi detetado nesta máquina.");
                     return;
                 }
 
-                // 2. Obtain Radio object
                 try
                 {
                     _bluetoothRadio = await adapter.GetRadioAsync();
@@ -60,7 +61,6 @@ namespace PoGoCoinBagWindows
                     _bluetoothRadio = null;
                 }
 
-                // Fallback: check all radios if adapter.GetRadioAsync() returned null
                 if (_bluetoothRadio == null)
                 {
                     var radios = await Radio.GetRadiosAsync();
@@ -69,85 +69,86 @@ namespace PoGoCoinBagWindows
 
                 if (_bluetoothRadio != null)
                 {
-                    TxtAdapterName.Text = string.IsNullOrWhiteSpace(_bluetoothRadio.Name) 
-                        ? "Adaptador Bluetooth" 
+                    TxtAdapterName.Text = string.IsNullOrWhiteSpace(_bluetoothRadio.Name)
+                        ? "Adaptador Bluetooth Windows"
                         : _bluetoothRadio.Name;
 
                     switch (_bluetoothRadio.State)
                     {
                         case RadioState.On:
-                            TxtRadioStatus.Text = "Ligado e Pronto (ON)";
-                            TxtRadioStatus.Foreground = new SolidColorBrush(Color.FromRgb(0x10, 0xB9, 0x81)); // Green
-                            StatusIndicatorDot.Fill = new SolidColorBrush(Color.FromRgb(0x10, 0xB9, 0x81));
-                            BtnTurnOn.Visibility = Visibility.Collapsed;
+                            TxtRadioStatus.Text = "LIGADO (Ativo)";
+                            TxtRadioStatus.Foreground = new SolidColorBrush(Color.FromRgb(0x10, 0xB9, 0x81));
+                            StatusDot.Fill = new SolidColorBrush(Color.FromRgb(0x10, 0xB9, 0x81));
+                            BtnTurnOnBluetooth.Visibility = Visibility.Collapsed;
+                            BtnConnect.IsEnabled = true;
+                            AppendLog($"[Hardware] Bluetooth ativo e funcional: {TxtAdapterName.Text}");
                             break;
 
                         case RadioState.Off:
-                            TxtRadioStatus.Text = "Desligado (OFF)";
-                            TxtRadioStatus.Foreground = new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44)); // Red
-                            StatusIndicatorDot.Fill = new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44));
-                            BtnTurnOn.Visibility = Visibility.Visible;
+                            TxtRadioStatus.Text = "DESLIGADO";
+                            TxtRadioStatus.Foreground = new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44));
+                            StatusDot.Fill = new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44));
+                            BtnTurnOnBluetooth.Visibility = Visibility.Visible;
+                            BtnConnect.IsEnabled = false;
+                            AppendLog("[Hardware] O Bluetooth está desligado. Carrega em 'Ligar Bluetooth'.");
                             break;
 
                         case RadioState.Disabled:
                             TxtRadioStatus.Text = "Desativado pelo Sistema";
-                            TxtRadioStatus.Foreground = new SolidColorBrush(Color.FromRgb(0xF5, 0x9E, 0x0B)); // Orange
-                            StatusIndicatorDot.Fill = new SolidColorBrush(Color.FromRgb(0xF5, 0x9E, 0x0B));
-                            BtnTurnOn.Visibility = Visibility.Collapsed;
+                            TxtRadioStatus.Foreground = new SolidColorBrush(Color.FromRgb(0xF5, 0x9E, 0x0B));
+                            StatusDot.Fill = new SolidColorBrush(Color.FromRgb(0xF5, 0x9E, 0x0B));
+                            BtnTurnOnBluetooth.Visibility = Visibility.Collapsed;
+                            BtnConnect.IsEnabled = false;
+                            AppendLog("[Hardware] O rádio Bluetooth foi desativado nas definições de rede.");
                             break;
 
                         default:
-                            TxtRadioStatus.Text = "Estado Desconhecido";
+                            TxtRadioStatus.Text = "Desconhecido";
                             TxtRadioStatus.Foreground = new SolidColorBrush(Color.FromRgb(0x94, 0xA3, 0xB8));
-                            StatusIndicatorDot.Fill = new SolidColorBrush(Color.FromRgb(0x94, 0xA3, 0xB8));
-                            BtnTurnOn.Visibility = Visibility.Visible;
+                            StatusDot.Fill = new SolidColorBrush(Color.FromRgb(0x94, 0xA3, 0xB8));
+                            BtnTurnOnBluetooth.Visibility = Visibility.Visible;
+                            BtnConnect.IsEnabled = true;
                             break;
                     }
                 }
                 else
                 {
-                    // Adapter exists but Radio object wasn't accessible
                     TxtAdapterName.Text = "Controlador Bluetooth Detetado";
-                    TxtRadioStatus.Text = "Ativo (verifique nas definições)";
+                    TxtRadioStatus.Text = "Operacional";
                     TxtRadioStatus.Foreground = new SolidColorBrush(Color.FromRgb(0x10, 0xB9, 0x81));
-                    StatusIndicatorDot.Fill = new SolidColorBrush(Color.FromRgb(0x10, 0xB9, 0x81));
-                    BtnTurnOn.Visibility = Visibility.Collapsed;
+                    StatusDot.Fill = new SolidColorBrush(Color.FromRgb(0x10, 0xB9, 0x81));
+                    BtnTurnOnBluetooth.Visibility = Visibility.Collapsed;
+                    BtnConnect.IsEnabled = true;
                 }
             }
             catch (Exception ex)
             {
-                TxtAdapterName.Text = "Erro de Leitura";
+                TxtAdapterName.Text = "Erro de Deteção";
                 TxtRadioStatus.Text = ex.Message;
                 TxtRadioStatus.Foreground = new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44));
-                StatusIndicatorDot.Fill = new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44));
+                StatusDot.Fill = new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44));
             }
             finally
             {
-                BtnRefresh.IsEnabled = true;
+                BtnRefreshStatus.IsEnabled = true;
             }
         }
 
-        private async void BtnRefresh_Click(object sender, RoutedEventArgs e)
-        {
-            await CheckBluetoothStatusAsync();
-        }
-
-        private async void BtnTurnOn_Click(object sender, RoutedEventArgs e)
+        private async void BtnTurnOnBluetooth_Click(object sender, RoutedEventArgs e)
         {
             if (_bluetoothRadio != null)
             {
-                BtnTurnOn.IsEnabled = false;
+                BtnTurnOnBluetooth.IsEnabled = false;
                 try
                 {
                     var result = await _bluetoothRadio.SetStateAsync(RadioState.On);
                     if (result == RadioAccessStatus.Allowed)
                     {
                         await Task.Delay(500);
-                        await CheckBluetoothStatusAsync();
+                        await CheckBluetoothHardwareAsync();
                     }
                     else
                     {
-                        // If system blocked programmatic toggle, open Windows Settings
                         OpenBluetoothSettings();
                     }
                 }
@@ -157,7 +158,7 @@ namespace PoGoCoinBagWindows
                 }
                 finally
                 {
-                    BtnTurnOn.IsEnabled = true;
+                    BtnTurnOnBluetooth.IsEnabled = true;
                 }
             }
             else
@@ -187,20 +188,114 @@ namespace PoGoCoinBagWindows
             }
         }
 
-        private void BtnOpenWebApp_Click(object sender, RoutedEventArgs e)
+        private async void BtnRefreshStatus_Click(object sender, RoutedEventArgs e)
         {
-            try
+            await CheckBluetoothHardwareAsync();
+        }
+
+        private async void BtnConnect_Click(object sender, RoutedEventArgs e)
+        {
+            BtnConnect.IsEnabled = false;
+            BtnCancel.Visibility = Visibility.Visible;
+            await _client.StartAsync();
+            BtnConnect.IsEnabled = true;
+            BtnCancel.Visibility = Visibility.Collapsed;
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            _client.Cancel();
+            BtnConnect.IsEnabled = true;
+            BtnCancel.Visibility = Visibility.Collapsed;
+        }
+
+        private void OnClientStateChanged(SessionState state, string message)
+        {
+            Dispatcher.Invoke(() =>
             {
-                Process.Start(new ProcessStartInfo
+                switch (state)
                 {
-                    FileName = "https://na-ji.github.io/pokemon-go-coin-bag/",
-                    UseShellExecute = true
-                });
-            }
-            catch (Exception ex)
+                    case SessionState.Idle:
+                        TxtStateHeadline.Text = "Pronto a Conectar";
+                        TxtStateHeadline.Foreground = new SolidColorBrush(Color.FromRgb(0x38, 0xBD, 0xF8));
+                        TxtStateDetail.Text = message;
+                        BtnConnect.Content = "📡 Conectar e Receber";
+                        break;
+
+                    case SessionState.Scanning:
+                        TxtStateHeadline.Text = "À Procura de Dispositivo...";
+                        TxtStateHeadline.Foreground = new SolidColorBrush(Color.FromRgb(0xFA, 0xCC, 0x15));
+                        TxtStateDetail.Text = "Mantém o Pokémon GO aberto no ecrã de conexão ou envio do postal.";
+                        BtnConnect.Content = "🔍 A procurar...";
+                        break;
+
+                    case SessionState.Connecting:
+                        TxtStateHeadline.Text = "A Ligar ao Telemóvel...";
+                        TxtStateHeadline.Foreground = new SolidColorBrush(Color.FromRgb(0x38, 0xBD, 0xF8));
+                        TxtStateDetail.Text = message;
+                        BtnConnect.Content = "🔗 A conectar...";
+                        break;
+
+                    case SessionState.ReadingDevice:
+                        TxtStateHeadline.Text = "A Ler Informações...";
+                        TxtStateHeadline.Foreground = new SolidColorBrush(Color.FromRgb(0x81, 0x8C, 0xF8));
+                        TxtStateDetail.Text = message;
+                        break;
+
+                    case SessionState.Pairing:
+                        TxtStateHeadline.Text = "A Emparelhar Nintendo Switch...";
+                        TxtStateHeadline.Foreground = new SolidColorBrush(Color.FromRgb(0xA8, 0x55, 0xF7));
+                        TxtStateDetail.Text = message;
+                        break;
+
+                    case SessionState.Exchanging:
+                        TxtStateHeadline.Text = "A Receber Postal...";
+                        TxtStateHeadline.Foreground = new SolidColorBrush(Color.FromRgb(0x10, 0xB9, 0x81));
+                        TxtStateDetail.Text = message;
+                        break;
+
+                    case SessionState.SuccessPair:
+                        TxtStateHeadline.Text = "🎉 Emparelhado com Sucesso!";
+                        TxtStateHeadline.Foreground = new SolidColorBrush(Color.FromRgb(0x10, 0xB9, 0x81));
+                        TxtStateDetail.Text = message;
+                        BtnConnect.Content = "📡 Conectar e Receber";
+                        break;
+
+                    case SessionState.SuccessExchange:
+                        TxtStateHeadline.Text = "🎁 Postal Recebido! Coin Bag Ativo!";
+                        TxtStateHeadline.Foreground = new SolidColorBrush(Color.FromRgb(0x10, 0xB9, 0x81));
+                        TxtStateDetail.Text = message;
+                        BtnConnect.Content = "📡 Conectar e Receber Novamente";
+                        break;
+
+                    case SessionState.Failed:
+                        TxtStateHeadline.Text = "⚠️ Falha na Operação";
+                        TxtStateHeadline.Foreground = new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44));
+                        TxtStateDetail.Text = message;
+                        BtnConnect.Content = "📡 Tentar Novamente";
+                        break;
+                }
+            });
+        }
+
+        private void OnClientLog(string message)
+        {
+            Dispatcher.Invoke(() =>
             {
-                MessageBox.Show($"Erro ao abrir o navegador: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+                AppendLog(message);
+            });
+        }
+
+        private void AppendLog(string message)
+        {
+            string time = DateTime.Now.ToString("HH:mm:ss");
+            TxtLog.AppendText($"[{time}] {message}\n");
+            LogScrollViewer.ScrollToEnd();
+        }
+
+        private void BtnClearLog_Click(object sender, RoutedEventArgs e)
+        {
+            TxtLog.Text = string.Empty;
         }
     }
 }
